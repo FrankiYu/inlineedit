@@ -32,9 +32,13 @@
     border-color: #ccc;
     border-bottom-right-radius: 0;
 }
+/*saving*/
+.inline-edit.focus.saving input,.inline-edit.focus.saving textarea{
+    border-bottom-right-radius: 3px;
+}
 /*buttons*/
 .inline-edit .edit {
-    z-index: 9999;
+    z-index: 999;
 	display: none;
     position: absolute;
     bottom: 0;
@@ -74,7 +78,7 @@
     border-top: 0;
     background: #eee url('../Sources/images/save.png') no-repeat scroll center 4px;
 }
-.inline-edit .loading{
+.inline-edit .chrysanthemum{
     z-index: 2000;
     display: none;
     position: absolute;
@@ -86,7 +90,12 @@
     border: 1px solid #ccc;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-    background: #eee url('../Sources/images/edit-loading.gif') no-repeat scroll center center;
+    background: #eee url('../Sources/images/edit-loading.gif') no-repeat scroll center 6px;
+}
+.inline-edit.saving input,.inline-edit.saving select,.inline-edit.saving textarea{
+    cursor: not-allowed;
+    pointer-events:none;
+    background-color: #F5F5F5;
 }
 .inline-edit .drop-toggle{
     z-index: 1000;
@@ -108,13 +117,14 @@
 .inline-edit.hover .edit,
 .inline-edit.focus .cancel,
 .inline-edit.focus .save,
-.inline-edit.loading .loading,
+.inline-edit.loading .chrysanthemum,
 .inline-edit.select.focus .drop-toggle,
 .inline-edit.select.open.focus .dropdown{
 	display: block;
 }
 .inline-edit.focus.select.open .save,
-.inline-edit.focus.select.open .cancel{
+.inline-edit.focus.select.open .cancel,
+.inline-edit.focus.saving .save,.inline-edit.focus.saving .cancel{
     display: none;
 }
 /*select*/
@@ -143,9 +153,10 @@
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
-.inline-edit.select input{
+.inline-edit.select.open input{
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    padding-right: 30px;
 }
 .inline-edit .dropdown>li{
     list-style: none;
