@@ -2,6 +2,7 @@
  * jquery.inlineedit.js v1.0.0
  * @date 2016-04-13
  * @author Franki<franki.yu@starlight-sms.com>
+ * @feedback <https://github.com/MooseFrankenstein/inlineedit/issues>
  * Licensed under the MIT license
  */
 (function($) {
@@ -32,6 +33,7 @@
                 timeout,
                 input = $this.children('.form-control'),
                 save = $this.children('.save'),
+                edit = $this.children('.edit'),
                 dropdown = $this.children('.drop-toggle'),
                 cancel = $this.children('.cancel');
             if (!('ontouchstart' in document.documentElement)) {
@@ -57,6 +59,9 @@
             input.bind('click', function() {
                 methods.focus.apply(input, $this);
             });
+            edit.bind('click', function() {
+                methods.focus.apply(input, $this);
+            });
             save.bind('click', function() {
                 methods.save.apply($this);
             });
@@ -70,31 +75,40 @@
     };
     // 输入框点击方法
     methods.focus = function(wrapper) {
+        $(this).focus();
+        $(this).data("value", $(this).val());
         var wrapper = $(wrapper),
             isAuto = wrapper.data('open'),
-            isSelect = wrapper.hasClass('select');
+            isSelect = wrapper.hasClass('select'),
+            oldValue = $(this).val();
         wrapper.removeClass('hover');
+        // 设置为默认自动打开下拉框的选择器
         if (isAuto && isSelect) {
             wrapper.addClass('focus open');
             methods.select.apply(wrapper);
+            // 设置为默认不自动打开的选择器
         } else if (!isAuto && isSelect) {
             wrapper.addClass('focus');
             methods.select.apply(wrapper);
         } else {
+            // 一般的输入框
             wrapper.addClass('focus');
         }
     };
     // 保存方法
     methods.save = function(wrapper) {
         var wrapper = $(this);
-        methods.loading.apply(wrapper);
+        methods.saving.apply(wrapper);
         setTimeout(function() {
-            wrapper.removeClass('focus loading open');
+            wrapper.removeClass('focus loading saving open');
         }, 1000);
     };
     // 回滚方法
-    methods.cancel = function() {
-
+    methods.cancel = function(wrapper) {
+        var wrapper = $(wrapper),
+            oldValue = $(this).data('value');
+        $(this).val(oldValue);
+        wrapper.removeClass('focus open');
     };
     // 下拉框取值方法
     methods.select = function() {
@@ -115,9 +129,13 @@
             wrapper.removeClass('loading').addClass('open');
         }, 1000);
     };
-    // 加载或保存数据方法
+    // 加载数据方法
     methods.loading = function() {
         $(this).addClass('loading');
+    };
+    // 保存数据方法
+    methods.saving = function() {
+        $(this).addClass('loading saving');
     };
     // 向jQuery中被保护的“fn”命名空间中添加插件代码，用“inlineedit”作为插件的函数名称
     $.fn.inlineedit = function(method) {
