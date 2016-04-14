@@ -1,11 +1,19 @@
 /*!
- * jquery.inlineedit.js v1.0.0
- * @date 2016-04-13
+ * jquery.inlineedit.js v1.1.0
+ * @date 2016-04-14
  * @author Franki<franki.yu@starlight-sms.com>
  * @feedback <https://github.com/MooseFrankenstein/inlineedit/issues>
  * Licensed under the MIT license
  */
-(function($) {
+if (typeof jQuery === 'undefined') {
+    throw new Error('jquery.inlineedit\'s JavaScript requires jQuery')
+} + function($) {
+    'use strict';
+    var version = $.fn.jquery.split(' ')[0].split('.')
+    if ((version[0] < 2 && version[1] < 2) || (version[0] == 1 && version[1] == 2 && version[2] < 1)) {
+        throw new Error('jquery.inlineedit\'s JavaScript requires jQuery version 1.2.1 or higher')
+    }
+}(jQuery); + function($) {
     // 开启严格模式
     'use strict';
     // 创建一个默认设置对象
@@ -20,7 +28,7 @@
     // 在字面量对象中定义每个单独的方法
     methods.init = function() {
         // 为了更好的灵活性，对来自主函数，并进入每个方法中的选择器其中的每个单独的元素都执行代码
-        $('.inline-edit').each(function() {
+        this.each(function() {
             // 为每个独立的元素创建一个jQuery对象
             var $this = $(this),
                 defaults = {
@@ -55,7 +63,30 @@
                     $this.removeClass('hover');
                 }, settings.delay.hide);
             });
-            // 事件绑定
+            $this.bind('focus', function() {
+                    $(this).bind('blur', function() {
+                        methods.save.apply($this);
+                    })
+                })
+                .bind('keydown', function(event) {
+                    switch (event.which) {
+                        // Esc键
+                        case 27:
+                            methods.cancel.apply(input, $this);
+                            break;
+                            // Tab键
+                        case 9:
+                            methods.save.apply(input, $this);
+                            break;
+                            // 回车键
+                        case 13:
+                            if (!jQuery(this).is('textarea')) {
+                                methods.save.apply(input, $this);
+                            }
+                            break;
+                    }
+                });
+            // 事件注册
             input.bind('click', function() {
                 methods.focus.apply(input, $this);
             });
@@ -63,7 +94,7 @@
                 methods.focus.apply(input, $this);
             });
             save.bind('click', function() {
-                methods.save.apply($this);
+                methods.save.apply(input, $this);
             });
             cancel.bind('click', function() {
                 methods.cancel.apply(input, $this);
@@ -97,7 +128,8 @@
     };
     // 保存方法
     methods.save = function(wrapper) {
-        var wrapper = $(this);
+        var wrapper = $(wrapper);
+        $(this).blur();
         methods.saving.apply(wrapper);
         setTimeout(function() {
             wrapper.removeClass('focus loading saving open');
@@ -107,7 +139,7 @@
     methods.cancel = function(wrapper) {
         var wrapper = $(wrapper),
             oldValue = $(this).data('value');
-        $(this).val(oldValue);
+        $(this).val(oldValue).blur();
         wrapper.removeClass('focus open');
     };
     // 下拉框取值方法
@@ -147,10 +179,10 @@
         } else if (typeof method === 'object' || !method) {
             // 如果我们传入的是一个对象参数，或者根本没有参数，init方法会被调用，用apply方法来调用我们的方法并传入参数
             return methods.init.apply(this, arguments);
-            // 如果方法不存在或者参数没传入，则报出错误。需要调用的方法没有被正确调用
         } else {
+            // 如果方法不存在或者参数没传入，则报出错误。需要调用的方法没有被正确调用
             $.error('Method ' + method + ' does not exist on $.error');
         }
     };
-})(jQuery);
+}(jQuery);
 // 局部作用域中使用$来引用jQuery
