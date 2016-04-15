@@ -5,14 +5,17 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://libs.baidu.com/fontawesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <link rel="stylesheet" type="text/css" href="stylesheets/jquery.inline-edit.css" media="screen">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>jQuery.inline-edit by MooseFrankenstein</title>
+    <title>jQuery.inline-edit by Franki</title>
 </head>
 
 <body>
@@ -32,25 +35,134 @@
                 <h3>
 <a class="anchor" href="#" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>General Use</h3>
                 <p>The first thing to do is to include the javascript files for jQuery and Inlineedit, as well as the Inlineedit stylesheet. These should ideally be included in the head of your html file.</p>
-                <pre><small class="codeType">HTML</small><font color="0000FF">&lt;<font color="0000FF">script</font> <font color="009900">type<font color="0000FF">=</font><font color="800080">"text/javascript"</font> src<font color="0000FF">=</font><font color="800080">"http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"</font></font>&gt;</font><font color="0000FF">&lt;/<font color="0000FF">script</font>&gt;</font>
-<font color="0000FF">&lt;<font color="0000FF">script</font> <font color="009900">type<font color="0000FF">=</font><font color="800080">"text/javascript"</font> src<font color="0000FF">=</font><font color="800080">"jquery.inline-edit.js"</font></font>&gt;</font><font color="0000FF">&lt;/<font color="0000FF">script</font>&gt;</font>
-<font color="0000FF">&lt;<font color="0000FF">link</font> <font color="009900">href<font color="0000FF">=</font><font color="800080">"jquery.inline-edit.css"</font> rel<font color="0000FF">=</font><font color="800080">"stylesheet"</font></font>&gt;</font></pre>
+                <pre style="background:#f1f1f1;color:#000">&lt;!DOCTYPE html>
+&lt;html lang=<span style="color:#c03030">"en"</span>>
+&lt;head>
+    ...
+    &lt;link rel=<span style="color:#c03030">"stylesheet"</span> href=<span style="color:#c03030">"path/to/jquery.inline-edit.css"</span>>
+&lt;/head>
+&lt;body>
+    ...
+    &lt;script src=<span style="color:#c03030">"path/to/jquery.inline-edit.js"</span>>&lt;/script>
+&lt;/body>
+&lt;/html> 
+</pre>
                 <h3>
 <a class="anchor" href="#" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creating a layout</h3>
-                <p>Now, we need to add basic Inlineedit layout to our page</p>
-                <pre><small class="codeType">HTML</small><font color="0000FF">&lt;<font color="0000FF">div</font> <font color="009900">class<font color="0000FF">=</font><font color="800080">"inline-edit"</font></font>&gt;</font>
-  <font color="0000FF">&lt;<font color="0000FF">input</font> <font color="009900">type<font color="0000FF">=</font><font color="800080">"text"</font></font> <font color="009900">class<font color="0000FF">=</font><font color="800080">"form-control input-sm"</font> <font color="0000FF">/</font></font>&gt;</font>
-  <font color="0000FF">&lt;<font color="0000FF">a</font> <font color="009900">href<font color="0000FF">=</font><font color="800080">"#"</font></font></font> <font color="009900">class<font color="0000FF">=</font><font color="800080">"edit"</font></font>&gt;</font></font><font color="0000FF">&lt;/</font><font color="0000FF">a</font>&gt;</font>
-  <font color="0000FF">&lt;<font color="0000FF">a</font> <font color="009900">href<font color="0000FF">=</font><font color="800080">"#"</font></font></font> <font color="009900">class<font color="0000FF">=</font><font color="800080">"save"</font></font>&gt;</font></font><font color="0000FF">&lt;/</font><font color="0000FF">a</font>&gt;</font>
-  <font color="0000FF">&lt;<font color="0000FF">a</font> <font color="009900">href<font color="0000FF">=</font><font color="800080">"#"</font></font></font> <font color="009900">class<font color="0000FF">=</font><font color="800080">"cancel"</font></font>&gt;</font></font><font color="0000FF">&lt;/</font><font color="0000FF">a</font>&gt;</font>
-  <font color="0000FF">&lt;<font color="0000FF">span</font></font> <font color="009900">class<font color="0000FF">=</font><font color="800080">"chrysanthemum"</font></font>&gt;</font></font><font color="0000FF">&lt;/</font><font color="0000FF">span</font>&gt;</font>
-<font color="0000FF">&lt;/<font color="0000FF">div</font>&gt;</font></pre>
-
+                <p>Now, we need to add basic Inlineedit layout to our page.</p>
+                <pre style="background:#f1f1f1;color:#000">&lt;div class<span style="color:#2060a0">=</span><span style="color:#c03030">"inline-edit"</span>>
+  &lt;input type<span style="color:#2060a0">=</span><span style="color:#c03030">"text"</span> class<span style="color:#2060a0">=</span><span style="color:#c03030">"form-control input-sm"</span> <span style="color:#2060a0">/</span>>
+  &lt;a href<span style="color:#2060a0">=</span><span style="color:#c03030">"#"</span> class<span style="color:#2060a0">=</span><span style="color:#c03030">"edit"</span>>&lt;<span style="color:#2060a0">/</span>a>
+  &lt;a href<span style="color:#2060a0">=</span><span style="color:#c03030">"#"</span> class<span style="color:#2060a0">=</span><span style="color:#c03030">"save"</span>>&lt;<span style="color:#2060a0">/</span>a>
+  &lt;a href<span style="color:#2060a0">=</span><span style="color:#c03030">"#"</span> class<span style="color:#2060a0">=</span><span style="color:#c03030">"cancel"</span>>&lt;<span style="color:#2060a0">/</span>a>
+  &lt;span class<span style="color:#2060a0">=</span><span style="color:#c03030">"chrysanthemum"</span>>&lt;<span style="color:#2060a0">/</span>span>
+&lt;<span style="color:#2060a0">/</span>div>
+</pre>
                 <h3>
-<a class="anchor" href="#" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Initialize</h3>
+<a class="anchor" href="#" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Initialize Inlineedit</h3>
                 <p>When the neccesary files have been included, it's very simple to set up Inlineedit on your page, simply target the element you wish to use with jQuery, and execute the Inlineedit function on it.</p>
-                <pre><small class="codeType">Javascript</small><span style="color: #007700">$(</span><span style="color: #DD0000">".inline-edit"</span><span style="color: #007700">).</span><span style="color: #0000BB">inlineedit</span><span style="color: #007700">();&nbsp;</span><span style="color: #0000BB"></span>
-                </pre>
+                <pre style="background:#f1f1f1;color:#000"><span style="color:#2060a0">$</span>(<span style="color:#c03030">".inline-edit"</span>).inlineedit();
+</pre>
+                <h3>
+<a class="anchor" href="#" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Default Setup</h3>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <div class="inline-edit">
+                                <input type="text" class="form-control input-sm" value="Franki" />
+                                <a href="#" class="edit"></a>
+                                <a href="javascript:void(0);" class="save"></a>
+                                <a href="#" class="cancel"></a>
+                                <span class="chrysanthemum"></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <h3>
+<a class="anchor" href="#" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Select Inlineedit</h3>
+                <p>Also, we need to add select Inlineedit layout to our page.</p>
+                <pre style="background:#f1f1f1;color:#000">&lt;div class<span style="color:#2060a0">=</span><span style="color:#c03030">"inline-edit select"</span>>
+  &lt;input type<span style="color:#2060a0">=</span><span style="color:#c03030">"text"</span> class<span style="color:#2060a0">=</span><span style="color:#c03030">"form-control input-sm"</span> value<span style="color:#2060a0">=</span><span style="color:#c03030">"test"</span> <span style="color:#2060a0">/</span>>
+  &lt;a href<span style="color:#2060a0">=</span><span style="color:#c03030">"#"</span> class<span style="color:#2060a0">=</span><span style="color:#c03030">"edit"</span>>&lt;<span style="color:#2060a0">/</span>a>
+  &lt;a href<span style="color:#2060a0">=</span><span style="color:#c03030">"#"</span> class<span style="color:#2060a0">=</span><span style="color:#c03030">"save"</span>>&lt;<span style="color:#2060a0">/</span>a>
+  &lt;a href<span style="color:#2060a0">=</span><span style="color:#c03030">"#"</span> class<span style="color:#2060a0">=</span><span style="color:#c03030">"cancel"</span>>&lt;<span style="color:#2060a0">/</span>a>
+  &lt;span href<span style="color:#2060a0">=</span><span style="color:#c03030">"#"</span> class<span style="color:#2060a0">=</span><span style="color:#c03030">"chrysanthemum"</span>>&lt;<span style="color:#2060a0">/</span>span>
+  &lt;a href<span style="color:#2060a0">=</span><span style="color:#c03030">"#"</span> class<span style="color:#2060a0">=</span><span style="color:#c03030">"drop-toggle"</span>>&lt;i class<span style="color:#2060a0">=</span><span style="color:#c03030">"fa fa-caret-down"</span>>&lt;<span style="color:#2060a0">/</span>i>&lt;<span style="color:#2060a0">/</span>a>
+  &lt;ul class<span style="color:#2060a0">=</span><span style="color:#c03030">"dropdown"</span>>
+    &lt;li>&lt;a href<span style="color:#2060a0">=</span><span style="color:#c03030">"#"</span>>Option one&lt;<span style="color:#2060a0">/</span>a>&lt;<span style="color:#2060a0">/</span>li>
+    &lt;li>&lt;a href<span style="color:#2060a0">=</span><span style="color:#c03030">"#"</span>>Option two&lt;<span style="color:#2060a0">/</span>a>&lt;<span style="color:#2060a0">/</span>li>
+    &lt;li>&lt;a href<span style="color:#2060a0">=</span><span style="color:#c03030">"#"</span>>Option three&lt;<span style="color:#2060a0">/</span>a>&lt;<span style="color:#2060a0">/</span>li>
+    &lt;li>&lt;a href<span style="color:#2060a0">=</span><span style="color:#c03030">"#"</span>>Option four&lt;<span style="color:#2060a0">/</span>a>&lt;<span style="color:#2060a0">/</span>li>
+    &lt;li>&lt;a href<span style="color:#2060a0">=</span><span style="color:#c03030">"#"</span>>Option five&lt;<span style="color:#2060a0">/</span>a>&lt;<span style="color:#2060a0">/</span>li>
+  &lt;<span style="color:#2060a0">/</span>ul>
+&lt;<span style="color:#2060a0">/</span>div>
+</pre>
+                <p>Demo:</p>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Sex</label>
+                        <div class="col-sm-10">
+                            <div class="inline-edit select">
+                                <input type="text" class="form-control input-sm" value="Franki" />
+                                <a href="#" class="edit"></a>
+                                <a href="javascript:void(0);" class="save"></a>
+                                <a href="#" class="cancel"></a>
+                                <span class="chrysanthemum"></span>
+                                <a href="#" class="drop-toggle"><i class="fa fa-caret-down"></i></a>
+                                <ul class="dropdown">
+                                    <li><a href="#">Male</a></li>
+                                    <li><a href="#">Female</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <p></p>
+                <p>It is also possible that you want to use select by auto show dropdown list. This works similarly as a auto complete plugin, so you can add the attribute <code>data-open:true</code>.</p>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Sex</label>
+                        <div class="col-sm-10">
+                            <div class="inline-edit select" data-open="true">
+                                <input type="text" class="form-control input-sm" value="Franki" />
+                                <a href="#" class="edit"></a>
+                                <a href="javascript:void(0);" class="save"></a>
+                                <a href="#" class="cancel"></a>
+                                <span class="chrysanthemum"></span>
+                                <a href="#" class="drop-toggle"><i class="fa fa-caret-down"></i></a>
+                                <ul class="dropdown">
+                                    <li><a href="#">Male</a></li>
+                                    <li><a href="#">Female</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <h3>
+<a class="anchor" href="#" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Textarea Inlineedit</h3>
+                <p>Also, we need to add textarea Inlineedit layout to our page and support auto grow by <code>jquery.ns-autogrow.min.js</code>.</p>
+                <pre style="background:#f1f1f1;color:#000">&lt;div class=<span style="color:#c03030">"inline-edit"</span>>
+  &lt;textarea class=<span style="color:#c03030">"form-control"</span>>&lt;/textarea>
+  &lt;a href=<span style="color:#c03030">"#"</span> class=<span style="color:#c03030">"edit"</span>>&lt;/a>
+  &lt;a href=<span style="color:#c03030">"#"</span> class=<span style="color:#c03030">"save"</span>>&lt;/a>
+  &lt;a href=<span style="color:#c03030">"#"</span> class=<span style="color:#c03030">"cancel"</span>>&lt;/a>
+  &lt;span href=<span style="color:#c03030">"#"</span> class=<span style="color:#c03030">"chrysanthemum"</span>>&lt;/span>
+&lt;/div>
+</pre>
+                <p>Demo:</p>
+                <form>
+                    <div class="form-group">
+                        <label>Comments</label>
+                        <div class="inline-edit">
+                            <textarea class="form-control">Lel fi huepe jupu akse zej ire vesik kojvulom zon is biwuwkef pa. Uv hokivej idefeulo foc omoemowa wahteze liv juvde puguprof epehuji upuga zige odfe igo sit pilamhul oto ukurecef.</textarea>
+                            <a href="#" class="edit"></a>
+                            <a href="#" class="save"></a>
+                            <a href="#" class="cancel"></a>
+                            <span href="#" class="chrysanthemum"></span>
+                        </div>
+                    </div>
+                </form>
             </section>
             <aside id="sidebar">
                 <a href="https://github.com/MooseFrankenstein/inlineedit/zipball/master" class="button">
@@ -65,6 +177,18 @@
             </aside>
         </div>
     </div>
+    <script type="text/javascript" src="javascripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="javascripts/jquery.inline-edit.js"></script>
+    <script type="text/javascript" src="javascripts/jquery.ns-autogrow.min.js"></script>
+    <script>
+    $(function() {
+        $('.inline-edit').inlineedit();
+        $('.inline-edit textarea').autogrow({
+            vertical: true,
+            horizontal: false
+        });
+    });
+    </script>
 </body>
 
 </html>
