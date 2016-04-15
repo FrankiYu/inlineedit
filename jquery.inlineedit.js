@@ -1,6 +1,6 @@
 /*!
- * jquery.inlineedit.js v1.1.0
- * @date 2016-04-14
+ * jquery.inlineedit.js v1.2.0
+ * @date 2016-04-15
  * @author Franki<franki.yu@starlight-sms.com>
  * @feedback <https://github.com/MooseFrankenstein/inlineedit/issues>
  * Licensed under the MIT license
@@ -26,9 +26,10 @@ if (typeof jQuery === 'undefined') {
     // 通过字面量创造一个对象，存储我们需要的共有方法
     var methods = {};
     // 在字面量对象中定义每个单独的方法
-    methods.init = function() {
+    methods.init = function(options) {
         // 为了更好的灵活性，对来自主函数，并进入每个方法中的选择器其中的每个单独的元素都执行代码
-        this.each(function() {
+        $.extend(config, options);
+        return this.each(function() {
             // 为每个独立的元素创建一个jQuery对象
             var $this = $(this),
                 defaults = {
@@ -37,7 +38,7 @@ if (typeof jQuery === 'undefined') {
                         hide: 75
                     }
                 },
-                settings = $.extend(defaults, config),
+                config = $.extend(defaults, config),
                 timeout,
                 input = $this.children('.form-control'),
                 save = $this.children('.save'),
@@ -55,37 +56,37 @@ if (typeof jQuery === 'undefined') {
                     if (!$this.hasClass('focus')) {
                         $this.addClass('hover');
                     }
-                }, settings.delay.show);
+                }, config.delay.show);
             });
             $this.mouseleave(function() {
                 clearTimeout(timeout);
                 timeout = setTimeout(function() {
                     $this.removeClass('hover');
-                }, settings.delay.hide);
+                }, config.delay.hide);
             });
-            $this.bind('focus', function() {
-                    $(this).bind('blur', function() {
-                        methods.save.apply($this);
-                    })
-                })
-                .bind('keydown', function(event) {
-                    switch (event.which) {
-                        // Esc键
-                        case 27:
-                            methods.cancel.apply(input, $this);
-                            break;
-                            // Tab键
-                        case 9:
-                            methods.save.apply(input, $this);
-                            break;
-                            // 回车键
-                        case 13:
-                            if (!jQuery(this).is('textarea')) {
-                                methods.save.apply(input, $this);
-                            }
-                            break;
-                    }
-                });
+            $this.bind('keydown', function(event) {
+                switch (event.which) {
+                    // Esc键
+                    case 27:
+                        methods.cancel.apply(input, $this);
+                        break;
+                        // Tab键
+                    case 9:
+                        methods.save.apply(input, $this);
+                        break;
+                        // 回车键
+                        // case 13:
+                        //     if (!jQuery(this).is('textarea')) {
+                        //         methods.save.apply(input, $this);
+                        //     }
+                        //     break;
+                }
+            });
+            $(document).bind('click', function(e) {
+                if (!(e.target == $this[0] || $.contains($this[0], e.target))) {
+                    methods.save.apply(input, $this);
+                }
+            });
             // 事件注册
             input.bind('click', function() {
                 methods.focus.apply(input, $this);
@@ -129,11 +130,13 @@ if (typeof jQuery === 'undefined') {
     // 保存方法
     methods.save = function(wrapper) {
         var wrapper = $(wrapper);
-        $(this).blur();
-        methods.saving.apply(wrapper);
-        setTimeout(function() {
-            wrapper.removeClass('focus loading saving open');
-        }, 1000);
+        if (wrapper.hasClass("focus")) {
+            $(this).blur();
+            methods.saving.apply(wrapper);
+            setTimeout(function() {
+                wrapper.removeClass('focus loading saving open');
+            }, 1000);
+        }
     };
     // 回滚方法
     methods.cancel = function(wrapper) {
