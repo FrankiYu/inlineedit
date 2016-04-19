@@ -1,6 +1,6 @@
 /*!
- * jquery.inlineedit.css v1.2.0
- * @date 2016-04-15
+ * jquery.inlineedit.css v1.3.0
+ * @date 2016-04-19
  * @author Franki<franki.yu@starlight-sms.com>
  * @feedback <https://github.com/MooseFrankenstein/inlineedit/issues>
  * Licensed under the MIT license
@@ -56,7 +56,7 @@
     border: 1px solid #ccc;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-    background: #eee url('../Sources/images/edit.png') no-repeat scroll center 4px;
+    background: #eee url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA4UlEQVQ4T63UARHCMAwF0LQ1gAQkhJuB4WASQAJKkAAoQAIYWC84wUBaLjvKdYyOrlsFvPu/baJg4aNKPURcAcCaiCg2ikDBjDE3AEDv/d5aew5oEVhVVQMA14DE6CRQkmmtj865g9a6UUqdAsrMG6mfDcY1AYCYeRtQ7/3DWouCZ4FfWAjVocaYmpnvRPTMAhNYQC9t2+6yX3kMk5rOuTok+/vKJViycin2E5yDDcC5WA9cAvuAS2ExWL+Hvbd8Ul9jbEN1k4KIA7AESyYsxXp3KEGjKrI4utmcerKWwxT0Bf7pvBW1rJrvAAAAAElFTkSuQmCC') no-repeat scroll center 4px;
 }
 .inline-edit .cancel{
     z-index: 1000;
@@ -70,7 +70,7 @@
     border-top: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 3px;
-    background: #eee url('../Sources/images/cancel.png') no-repeat scroll center 4px;
+    background: #eee url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAv0lEQVQ4T7WU0Q3DIAxEbbEQEgu0k9Bslk7SLgBiIUSE1Ehu4/iIRPnl9LB9Z5gmH57Mo/8Dvfe3Usp7pHJN+1VhFzjnXq21Nee8WNAQwkpEsdZ6lwUcWt6FFnTXENEzpfSQD6sztKAWrINPTdGgCGYC+6WEMnN/PGptwpalQECJmQ8z+zUO5lC0SSPum0A5s08lEUGhKXJmI5EyY6MZgKCnwbbctKDq6qFoyEjB1Zv6OYz8MEgDc4gAl4N9FbgBjvedFSuIZKEAAAAASUVORK5CYII=') no-repeat scroll center 4px;
 }
 .inline-edit .save{
     z-index: 1000;
@@ -83,7 +83,7 @@
     border: 1px solid #ccc;
     border-right: 0;
     border-top: 0;
-    background: #eee url('../Sources/images/save.png') no-repeat scroll center 4px;
+    background: #eee url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAwUlEQVQ4T93UwQ3CMAwFUDtZoCPABlY2YBMYgUkYATZhg8gjdIROYKMcLKU0bZqoF+ipUpWnb8cuwsEPHuzBn4NERKllzMzWuu6SE+aceydIRM7MPKX3LtAwRBxU9RZjfHUn3MKaE9awBVhqspWyB5uBRDR470dVVRG55De3F1skDCFcEfGpqpOhLVixhzkKAHcAeJRuc21li2NjqB36Ho2t/V+dwyzpbM5qP5PNwSaiEzOPNST/3rUpXSW3pPqthB+c+HkV6wLDRAAAAABJRU5ErkJggg==') no-repeat scroll center 4px;
 }
 .inline-edit .chrysanthemum{
     z-index: 2000;
@@ -97,7 +97,7 @@
     border: 1px solid #ccc;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-    background: #eee url('../Sources/images/edit-loading.gif') no-repeat scroll center 6px;
+    background: #eee url('data:image/gif;base64,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') no-repeat scroll center 6px;
 }
 .inline-edit.saving input,.inline-edit.saving select,.inline-edit.saving textarea{
     cursor: not-allowed;
@@ -136,12 +136,12 @@
 }
 /*select*/
 .inline-edit .dropdown{
+    z-index: 2001;
     position: absolute;
     left: 0;
     top: 30px;
     width: 100%;
     display: none;
-    z-index: 1000;
     min-width: 160px;
     max-height: 250px;
     overflow-x: hidden;
