@@ -1,6 +1,6 @@
 /*!
- * jquery.inlineedit.css v1.2.0
- * @date 2016-04-15
+ * jquery.inlineedit.css v1.3.0
+ * @date 2016-04-19
  * @author Franki<franki.yu@starlight-sms.com>
  * @feedback <https://github.com/MooseFrankenstein/inlineedit/issues>
  * Licensed under the MIT license
@@ -46,7 +46,7 @@
 /*buttons*/
 .inline-edit .edit {
     z-index: 999;
-    display: none;
+	display: none;
     position: absolute;
     bottom: 0;
     right: 0;
@@ -127,7 +127,7 @@
 .inline-edit.loading .chrysanthemum,
 .inline-edit.select.focus .drop-toggle,
 .inline-edit.select.open.focus .dropdown{
-    display: block;
+	display: block;
 }
 .inline-edit.focus.select.open .save,
 .inline-edit.focus.select.open .cancel,
@@ -136,12 +136,12 @@
 }
 /*select*/
 .inline-edit .dropdown{
+    z-index: 2001;
     position: absolute;
     left: 0;
     top: 30px;
     width: 100%;
     display: none;
-    z-index: 1000;
     min-width: 160px;
     max-height: 250px;
     overflow-x: hidden;
