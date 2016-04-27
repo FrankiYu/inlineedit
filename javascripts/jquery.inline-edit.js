@@ -1,6 +1,6 @@
 /*!
- * jquery.inlineedit.js v1.2.0
- * @date 2016-04-15
+ * jquery.inlineedit.js v1.3.0
+ * @date 2016-04-19
  * @author Franki<franki.yu@starlight-sms.com>
  * @feedback <https://github.com/MooseFrankenstein/inlineedit/issues>
  * Licensed under the MIT license
@@ -45,12 +45,6 @@ if (typeof jQuery === 'undefined') {
                 edit = $this.children('.edit'),
                 dropdown = $this.children('.drop-toggle'),
                 cancel = $this.children('.cancel');
-            if (!('ontouchstart' in document.documentElement)) {
-                $this.click(function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                });
-            }
             $this.mouseenter(function() {
                 timeout = setTimeout(function() {
                     if (!$this.hasClass('focus')) {
@@ -75,14 +69,14 @@ if (typeof jQuery === 'undefined') {
                         methods.save.apply(input, $this);
                         break;
                         // 回车键
-                        // case 13:
-                        //     if (!jQuery(this).is('textarea')) {
-                        //         methods.save.apply(input, $this);
-                        //     }
-                        //     break;
+                    case 13:
+                        if (!input.is('textarea')) {
+                            methods.save.apply(input, $this);
+                        }
+                        break;
                 }
             });
-            $(document).bind('click', function(e) {
+            $(document).on('click', function(e) {
                 if (!(e.target == $this[0] || $.contains($this[0], e.target))) {
                     methods.save.apply(input, $this);
                 }
