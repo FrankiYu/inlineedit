@@ -1,6 +1,6 @@
 /*!
- * jquery.inlineedit.css v1.3.1
- * @date 2016-04-27
+ * jquery.inlineedit.css v1.3.2
+ * @date 2016-05-03
  * @author Franki<franki.yu@starlight-sms.com>
  * @feedback <https://github.com/MooseFrankenstein/inlineedit/issues>
  * Licensed under the MIT license
@@ -46,7 +46,7 @@
 }
 /*buttons*/
 .inline-edit .edit {
-    z-index: 999;
+    z-index: 998;
     display: none;
     position: absolute;
     bottom: 0;
@@ -106,7 +106,7 @@
     background-color: #F5F5F5;
 }
 .inline-edit .drop-toggle{
-    z-index: 999;
+    z-index: 998;
     display: none;
     position: absolute;
     bottom: 0;
