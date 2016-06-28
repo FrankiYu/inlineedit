@@ -1,6 +1,6 @@
 /*!
- * jquery.inlineedit.js v1.3.0
- * @date 2016-04-19
+ * jquery.inlineedit.js v1.4.0
+ * @date 2016-06-28
  * @author Franki<franki.yu@starlight-sms.com>
  * @feedback <https://github.com/MooseFrankenstein/inlineedit/issues>
  * Licensed under the MIT license
@@ -125,11 +125,15 @@ if (typeof jQuery === 'undefined') {
     methods.save = function(wrapper) {
         var wrapper = $(wrapper);
         if (wrapper.hasClass("focus")) {
-            $(this).blur();
-            methods.saving.apply(wrapper);
-            setTimeout(function() {
-                wrapper.removeClass('focus loading saving open');
-            }, 1000);
+            var valid = wrapper.find('input').attr("aria-invalid");
+            if (valid == "false" || typeof(valid) == "undefined") {
+                $(this).blur();
+                methods.saving.apply(wrapper);
+                $(this).val($(this).val());
+                setTimeout(function() {
+                    wrapper.removeClass('focus loading saving open');
+                }, 1000);
+            }
         }
     };
     // 回滚方法

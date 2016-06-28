@@ -47,7 +47,7 @@
 /*buttons*/
 .inline-edit .edit {
     z-index: 998;
-	display: none;
+    display: none;
     position: absolute;
     bottom: 0;
     right: 0;
@@ -128,7 +128,7 @@
 .inline-edit.loading .chrysanthemum,
 .inline-edit.select.focus .drop-toggle,
 .inline-edit.select.open.focus .dropdown{
-	display: block;
+    display: block;
 }
 .inline-edit.focus.select.open .save,
 .inline-edit.focus.select.open .cancel,
@@ -189,6 +189,7 @@
     border-bottom-right-radius: 0;
 }
 .inline-edit input + .error{
+    font-weight: normal;
     position: absolute;
     z-index: 1001;
     width: 100%;
@@ -199,6 +200,7 @@
     overflow: hidden;
     white-space: nowrap;
     height: 30px;
+    line-height: 30px;
     border-bottom-left-radius: 3px;
     font-style: italic;
     margin: 0;
