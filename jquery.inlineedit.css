@@ -1,6 +1,6 @@
 /*!
- * jquery.inlineedit.css v1.3.2
- * @date 2016-05-03
+ * jquery.inlineedit.css v1.4.0
+ * @date 2016-06-28
  * @author Franki<franki.yu@starlight-sms.com>
  * @feedback <https://github.com/MooseFrankenstein/inlineedit/issues>
  * Licensed under the MIT license
@@ -47,7 +47,7 @@
 /*buttons*/
 .inline-edit .edit {
     z-index: 998;
-    display: none;
+	display: none;
     position: absolute;
     bottom: 0;
     right: 0;
@@ -128,7 +128,7 @@
 .inline-edit.loading .chrysanthemum,
 .inline-edit.select.focus .drop-toggle,
 .inline-edit.select.open.focus .dropdown{
-    display: block;
+	display: block;
 }
 .inline-edit.focus.select.open .save,
 .inline-edit.focus.select.open .cancel,
@@ -183,4 +183,28 @@
     color: #262626;
     text-decoration: none;
     background-color: #f5f5f5;
+}
+.inline-edit input{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.inline-edit input + .error{
+    position: absolute;
+    z-index: 1001;
+    width: 100%;
+    left: 0;
+    top: 30px;
+    padding: 0 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 30px;
+    border-bottom-left-radius: 3px;
+    font-style: italic;
+    margin: 0;
+    background-color: #f44336;
+    color: #fff !important;
+}
+.inline-edit input.error ~ .save,.inline-edit input.error ~ .cancel{
+    bottom: -30px;
 }
