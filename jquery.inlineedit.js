@@ -1,6 +1,6 @@
 /*!
- * jquery.inlineedit.js v1.4.0
- * @date 2016-06-28
+ * jquery.inlineedit.js v1.5.0
+ * @date 2016-06-29
  * @author Franki<franki.yu@starlight-sms.com>
  * @feedback <https://github.com/MooseFrankenstein/inlineedit/issues>
  * Licensed under the MIT license
