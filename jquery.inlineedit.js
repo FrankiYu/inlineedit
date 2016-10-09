@@ -1,6 +1,6 @@
 /*!
- * jquery.inlineedit.js v1.5.0
- * @date 2016-06-29
+ * jquery.inlineedit.js v1.6.0
+ * @date 2016-10-09
  * @author Franki<franki.yu@starlight-sms.com>
  * @feedback <https://github.com/MooseFrankenstein/inlineedit/issues>
  * Licensed under the MIT license
@@ -106,14 +106,24 @@ if (typeof jQuery === 'undefined') {
         var wrapper = $(wrapper),
             isAuto = wrapper.data('open'),
             isSelect = wrapper.hasClass('select'),
+            actionsBox = wrapper.data('actions-box'),
+            isSelect = wrapper.hasClass('select'),
             oldValue = $(this).val();
         wrapper.removeClass('hover');
         // 设置为默认自动打开下拉框的选择器
-        if (isAuto && isSelect) {
+        if (isAuto && isSelect && actionsBox) {
             wrapper.addClass('focus open');
+            wrapper.find('ul.dropdown').prepend('<li><div class="btn-group btn-group-justified"><a href="javascript:void(0);" class="btn btn-default btn-sm">Select All</a><a href="javascript:void(0);" class="btn btn-default btn-sm">Deselect All</a></div></li>');
             methods.select.apply(wrapper);
             // 设置为默认不自动打开的选择器
-        } else if (!isAuto && isSelect) {
+        } else if (!isAuto && isSelect && actionsBox) {
+            wrapper.addClass('focus');
+            wrapper.find('ul.dropdown').prepend('<li><div class="btn-group btn-group-justified"><a href="javascript:void(0);" class="btn btn-default btn-sm">Select All</a><a href="javascript:void(0); class="btn btn-default btn-sm">Deselect All</a></div></li>');
+            methods.select.apply(wrapper);
+        } else if (isAuto && isSelect && !actionsBox) {
+            wrapper.addClass('focus open');
+            methods.select.apply(wrapper);
+        } else if (!isAuto && isSelect && !actionsBox) {
             wrapper.addClass('focus');
             methods.select.apply(wrapper);
         } else {
@@ -147,11 +157,21 @@ if (typeof jQuery === 'undefined') {
     methods.select = function() {
         var wrapper = $(this),
             dropdown = wrapper.find('.dropdown>li>a'),
-            input = wrapper.children('.form-control');
+            input = wrapper.children('.form-control'),
+            checkbox = wrapper.find('input[type="checkbox"]');
         dropdown.bind('click', function() {
-            var txt = $(this).text();
-            input.val(txt);
-            wrapper.removeClass('open');
+            var $checkbox = $(this).find('input[type="checkbox"]'),
+                value = $(this).text();
+            if (checkbox.length > 0) {
+                if ($checkbox.is(':checked')) {
+                    $checkbox.prop("checked", false);
+                } else {
+                    $checkbox.prop("checked", true);
+                }
+                input.val(value);
+            } else {
+                wrapper.removeClass('open');
+            }
         });
     };
     // 下拉框方法
