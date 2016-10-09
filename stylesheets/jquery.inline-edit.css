@@ -1,6 +1,6 @@
 /*!
- * jquery.inlineedit.css v1.5.0
- * @date 2016-06-29
+ * jquery.inlineedit.css v1.6.0
+ * @date 2016-10-09
  * @author Franki<franki.yu@starlight-sms.com>
  * @feedback <https://github.com/MooseFrankenstein/inlineedit/issues>
  * Licensed under the MIT license
@@ -47,7 +47,7 @@
 }
 
 /*saving*/
-.inline-edit.focus.saving input, .inline-edit.focus.saving textarea {
+.inline-edit.focus.saving input, .inline-edit.focus.saving textarea,.inline-edit.focus.saving .drop-toggle {
     border-bottom-right-radius: 3px;
 }
 
@@ -167,6 +167,9 @@
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
+.inline-edit.focus .drop-toggle, .inline-edit.select.open .drop-toggle {
+    border-bottom-right-radius: 0;
+}
 .inline-edit .dropdown > li {
     list-style: none;
 }
@@ -175,7 +178,7 @@
     line-height: 1.42857143;
     display: block;
     clear: both;
-    padding: 3px 20px;
+    padding: 3px 15px;
     list-style: none;
     white-space: nowrap;
     color: #333;
@@ -184,10 +187,6 @@
     text-decoration: none;
     color: #262626;
     background-color: #f5f5f5;
-}
-.inline-edit input {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
 }
 .inline-edit input + .error {
     font-weight: normal;
@@ -210,4 +209,14 @@
 }
 .inline-edit input.error ~ .save, .inline-edit input.error ~ .cancel {
     bottom: -30px;
+}
+/*multi-select*/
+.inline-edit.multi-select input{
+    padding-right: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.inline-edit .dropdown .btn-group{
+    padding: 5px 15px;
 }
